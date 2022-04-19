@@ -3,24 +3,26 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {signOut} from '../lib/auth';
 import {createUser, usersCollection} from '../lib/users';
-// import {useUserContext} from '../contexts/UserContext';
+import {useUserContext} from '../contexts/UserContext';
 import BorderInput from './BorderInput';
 import CustomButton from './CustomButton';
 
 function SetupProfile() {
   const [displayName, setDisplayName] = useState('');
   const navigation = useNavigation();
-//   const {setUser} = useUserContext();
+  const {setUser} = useUserContext();
 
   const {params} = useRoute();
   const {uid} = params || {};
 
   const onSubmit = () => {
-    createUser({
+    const user = {
       id: uid,
       displayName,
       photoURL: null,
-    });
+    };
+    createUser(user);
+    setUser(user);
   };
   const onCancel = () => {
     signOut();
