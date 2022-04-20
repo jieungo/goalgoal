@@ -67,7 +67,7 @@ function TodoScreen() {
     const onMoveToFeed = () => {
         setTodos([]);
         setActive(false);
-        navigation.navigate('Feed');
+        navigation.navigate('Upload');
     }
 
     return (
