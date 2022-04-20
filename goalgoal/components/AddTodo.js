@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 
-function AddTodo({onInsert}) {
+function AddTodo({onInsert, active}) {
     const [text, setText] = useState('');
     const onPress = () => {
         onInsert(text);
@@ -12,19 +12,23 @@ function AddTodo({onInsert}) {
 
     return (
         <View style={styles.block}>
-            <TextInput 
-                placeholder='할일을 입력하세요.' 
-                style={styles.input}
-                value={text}
-                onChangeText={setText}
-                onSubmitEditing={onPress}
-                returnKeyType="done"
-                />
-                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-                    <View style={styles.addIcon}>
-                        <Icon name="add" size={30}/>
-                    </View>
-                </TouchableOpacity>
+            {!active && (
+                <>
+                <TextInput 
+                    placeholder='할일을 입력하세요.' 
+                    style={styles.input}
+                    value={text}
+                    onChangeText={setText}
+                    onSubmitEditing={onPress}
+                    returnKeyType="done"
+                    />
+                    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+                        <View style={styles.addIcon}>
+                            <Icon name="add" size={30}/>
+                        </View>
+                    </TouchableOpacity>
+                </>
+            )}
         </View>
     )
 }

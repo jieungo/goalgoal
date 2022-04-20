@@ -61,7 +61,7 @@ function TodoScreen() {
             }
         }
         isEverythingDone();
-        
+
     },[todos])
 
     const onMoveToFeed = () => {
@@ -75,7 +75,7 @@ function TodoScreen() {
                 behavior={Platform.select({ios: 'padding'})}
                 style={styles.avoid}>
                 <DateHead date={today}/>
-                {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove}/>}
+                {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} active={active}/>}
                 {active && (
                     <>
                         <View style={styles.fullScreen}/>
@@ -84,7 +84,7 @@ function TodoScreen() {
                         </TouchableOpacity>
                     </>
                 )}
-                <AddTodo onInsert={onInsert} />
+                <AddTodo onInsert={onInsert} active={active} />
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
