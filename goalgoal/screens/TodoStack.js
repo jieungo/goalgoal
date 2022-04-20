@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 function TodoStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Todo" component={TodoScreen} />
+            <Stack.Screen name="Todo" component={TodoScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }

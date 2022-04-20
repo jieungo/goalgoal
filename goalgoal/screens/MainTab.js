@@ -13,7 +13,7 @@ function MainTab() {
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
-                tabBarActiveTintColor: '#6200ee',
+                tabBarActiveTintColor: '#FF7C44',
             }}
         >
             <Tab.Screen
