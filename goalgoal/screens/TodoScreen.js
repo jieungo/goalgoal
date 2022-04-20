@@ -56,7 +56,7 @@ function TodoScreen() {
             todoArray.push(newTodo);
             const newTodoLength = todoArray[0].length;
             const todoLength = todos.length;
-            if (newTodoLength === todoLength) {
+            if (newTodoLength === todoLength && todos.length !== 0) {
                 setActive(true);
             }
         }
@@ -65,6 +65,7 @@ function TodoScreen() {
     },[todos])
 
     const onMoveToFeed = () => {
+        setTodos([]);
         setActive(false);
         navigation.navigate('Feed');
     }
