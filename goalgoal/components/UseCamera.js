@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import UploadModal from './UploadModal';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
+import ActionSheetModal from './ActionSheetModal';
 
 function UseCamera() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -60,11 +61,21 @@ function UseCamera() {
                     <Text style={styles.uploadText}>클릭하여 이미지 업로드하기</Text>
                 </View>
             </TouchableOpacity>
-            <UploadModal
+            <ActionSheetModal
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
-                onLaunchCamera={onLaunchCamera}
-                onLaunchImageLibrary={onLaunchImageLibrary}
+                actions={[
+                    {
+                        icon: 'camera-alt',
+                        text: '카메라로 촬영하기',
+                        onPress: onLaunchCamera,
+                    },
+                    {
+                        icon: 'photo',
+                        text: '사진 선택하기',
+                        onPress: onLaunchImageLibrary,
+                    }
+                ]}
             />
         </>
     )

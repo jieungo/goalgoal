@@ -1,19 +1,8 @@
 import React from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, View, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from './CustomButton';
-
-const Buttons = styled.View`
-    margin-top: 60;
-`;
-
-const Spinner = styled.View`
-    margin-top: 60;
-    height: 100;
-    justify-content: center;
-    align-items: center;
-`;
 
 function SignButtons({isSignUp, onSubmit, loading}) {
     const navigation = useNavigation();
@@ -31,19 +20,29 @@ function SignButtons({isSignUp, onSubmit, loading}) {
 
     if (loading) {
         return (
-            <Spinner>
-                <ActivityIndicator size={32} color="#FF7C44" />
-            </Spinner>
+                <ActivityIndicator size={32} color="#FF7C44" style={styles.spinner} />
         )
     }
 
     return (
-        <Buttons>
+        <View style={styles.button}>
             <CustomButton title={primaryTitle} hasMarginBottom onPress={onSubmit} />
             <CustomButton title={secondaryTitle} theme="secondary" onPress={onSecondaryButtonPress}
             />
-        </Buttons>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    button: {
+        marginTop: 60,
+    },
+    spinner: {
+        marginTop: 60,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
 
 export default SignButtons;

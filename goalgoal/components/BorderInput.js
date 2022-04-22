@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextInput,StyleSheet } from 'react-native';
-import styled from 'styled-components';
 
 function BorderInput({hasMarginBottom, ...rest}, ref) {
     return (

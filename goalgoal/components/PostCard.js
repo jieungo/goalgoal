@@ -1,6 +1,10 @@
 import React,{useMemo} from 'react';
 import {View, StyleSheet, Text, Image, Pressable} from 'react-native';
 import Avatar from './Avatar';
+import { useUserContext } from '../contexts/UserContext';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import usePostActions from '../hooks/usePostActions';
+import ActionSheetModal from './ActionSheetModal';
 import { useNavigation } from '@react-navigation/native';
 
 function PostCard({user, photoURL, description, createdAt, id}) {
@@ -8,35 +12,45 @@ function PostCard({user, photoURL, description, createdAt, id}) {
         () => (createdAt ? new Date(createdAt._seconds * 1000) : new Date()),
         [createdAt],
     )
+    const {user: me} = useUserContext();
+    const isMyPost = me.id === user.id;
 
-    const navigation = useNavigation();
-
-    const onOpenProfile = () => {
-        navigation.navigate('Profile', {
-            userId: user.id,
-            displayName: user.displayName,
-        })
-    }
+    const {isSelecting, onPressMore, onClose, actions} = usePostActions({
+        id,
+        description,
+    });
 
 return (
+    <>
     <View style={styles.block}>
         <View style={[styles.head, styles.paddingBlock]}>
-            <Pressable style={styles.profile} onPress={onOpenProfile}>
-                <Avatar source={user.photoURL && {uri: user.photoURL}} />
-                <Text style={styles.displayName}>{user.displayName}</Text>
-            </Pressable>
+                <View style={styles.profile}>
+                    <Avatar source={user.photoURL && {uri: user.photoURL}} />
+                    <Text style={styles.displayName}>{user.displayName}</Text>
+                </View>
+            {isMyPost && (
+                <Pressable hitSlop={8} onPress={onPressMore}>
+                    <Icon name="more-vert" size={20} />
+                </Pressable>
+            )}
         </View>
             <Image 
                 source={{uri: photoURL}}
                 resizeMethod="resize"
                 resizeMode="cover"
                 style={styles.image}
-            />
+                />
             <View style={styles.paddingBlock}>
                 <Text style={styles.description}>{description}</Text>
                 <Text date={date} style={styles.date}>{date.toLocaleString()}</Text>
             </View>
     </View>
+    <ActionSheetModal
+        visible={isSelecting}
+        actions={actions}
+        onClose={onClose}
+    />
+</>
 )
 }
 
@@ -82,4 +96,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PostCard;
+export default PostCard

@@ -10,7 +10,7 @@ function FeedScreen() {
 
     useEffect(() => {
         getPosts().then(setPosts);
-    }, []);
+    }, [posts]);
 
     const onLoadMore = async () => {
         if (noMorePost || !posts | posts.length < PAGE_SIZE) {

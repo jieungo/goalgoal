@@ -8,6 +8,7 @@ import {useUserContext} from '../contexts/UserContext';
 import {v4} from 'uuid';
 import {createPost} from '../lib/posts';
 
+
 function UploadScreen() {
     const route = useRoute();
     const {res} = route.params || {};
@@ -17,9 +18,10 @@ function UploadScreen() {
     const [description, setDescription] = useState('');
     const navigation = useNavigation();
     const {user} = useUserContext();
+
     
     const onSubmit = useCallback(async() => {
-        navigation.pop();
+        navigation.navigate('Feed');
         const asset = res.assets[0];
 
         const extension = asset.fileName.split('.').pop();

@@ -1,35 +1,31 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import { getPosts } from '../lib/posts';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { getUser } from '../lib/users';
 import Avatar from './Avatar';
+import { useUserContext } from '../contexts/UserContext';
+import LogoutButton from './LogoutButton';
 
 function Profile({userId}) {
     const [user, setUser] = useState(null);
-    const [posts, setPosts] = useState(null);
 
     useEffect(() => {
         getUser(userId).then(setUser);
-        getPosts({userId}).then(setPosts);
-    }, [userId]);
+        console.log(userId)
+    }, []);
 
-    if (!user || !posts) {
-        return (
-            <ActivityIndicator style={styles.spinner} size={32} color="#6200ee" />
-        )
-    }
 
     return (
-        <FlatList
-            style={styles.block}
-            ListHeaderComponent={
-                <View style={styles.userInfo}>
-                    <Avatar source={user.photoURL && {uri: user.photoURL}} size={128} />
-                    <Text style={styles.username}>{user.displayName}</Text>
-                </View>
-            }
-        />
+        <View style={styles.block} >
+            {user && (
+                <>
+                    <View style={styles.userInfo}>
+                        <Avatar source={user.photoURL && {uri: user.photoURL}} size={128} />
+                        <Text style={styles.username}>{user.displayName}</Text>
+                    </View>
+                    <LogoutButton />
+                </>
+            )}
+        </View>
     )
 }
 

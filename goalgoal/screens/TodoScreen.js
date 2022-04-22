@@ -14,7 +14,6 @@ function TodoScreen() {
     const [active, setActive] = useState(false);
     const navigation = useNavigation();
     
-
     useEffect(() => {
         todosStorage
             .get()
