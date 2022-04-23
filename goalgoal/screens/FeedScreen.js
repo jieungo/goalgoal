@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { FlatList, ActivityIndicator, StyleSheet, RefreshControl } from 'react-native';
 import PostCard from '../components/PostCard';
 import {getPosts, getOlderPosts, PAGE_SIZE, getNewerPosts} from '../lib/posts';
+import SplashScreen from 'react-native-splash-screen';
 
 function FeedScreen() {
     const [posts, setPosts] = useState(null);
@@ -11,6 +12,13 @@ function FeedScreen() {
     useEffect(() => {
         getPosts().then(setPosts);
     }, [posts]);
+
+    const postsReady = posts !== null;
+    useEffect(() => {
+        if(postsReady) {
+            SplashScreen.hide();
+        }
+    },[postsReady]);
 
     const onLoadMore = async () => {
         if (noMorePost || !posts | posts.length < PAGE_SIZE) {
