@@ -46,11 +46,6 @@ function FeedScreen() {
             contentContainerStyle={styles.container}
             onEndReached={onLoadMore}
             onEndReachedThreshold={0.75}
-            ListFooterComponent={
-                !noMorePost && (
-                    <ActivityIndicator style={styles.spinner} size={32} color="#6200ee" />
-                )
-            }
             refreshControl={
                 <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
             }
@@ -71,9 +66,6 @@ const renderItem = ({item}) => (
 const styles = StyleSheet.create({
     container: {
         paddingBottom: 48,
-    },
-    spinner: {
-        height: 64,
     }
 })
 

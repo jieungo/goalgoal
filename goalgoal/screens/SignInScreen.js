@@ -47,7 +47,7 @@ function SignInScreen({navigation, route}) {
             const msg = message[e.code] || `${isSignUp ? '가입' : '로그인'} 실패`;
             Alert.alert('실패', msg);
         } finally {
-            setLoading(false);
+            return () => setLoading(false);
         }
     }
 
