@@ -4,6 +4,7 @@ import { getUser } from '../lib/users';
 import Avatar from './Avatar';
 import { useUserContext } from '../contexts/UserContext';
 import LogoutButton from './LogoutButton';
+import CalendarView from './CalendarView';
 
 function Profile({userId}) {
     const [user, setUser] = useState(null);
@@ -22,6 +23,7 @@ function Profile({userId}) {
                         <Avatar source={user.photoURL && {uri: user.photoURL}} size={128} />
                         <Text style={styles.username}>{user.displayName}</Text>
                     </View>
+                    <CalendarView />
                     <LogoutButton />
                 </>
             )}

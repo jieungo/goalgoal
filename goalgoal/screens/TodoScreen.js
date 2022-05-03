@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform, Alert, Text, Pressable, TouchableOpacity } from 'react-native';
 import {  SafeAreaView } from 'react-native-safe-area-context';
 import DateHead from '../components/DateHead';
@@ -7,23 +7,30 @@ import Empty from '../components/Empty';
 import TodoList from '../components/TodoList';
 import todosStorage from '../storages/todosStorage';
 import { useNavigation } from '@react-navigation/native';
+import { createTodo, getTodos } from '../lib/todos';
+import { useUserContext } from '../contexts/UserContext';
 
 function TodoScreen() {
     const today = new Date();
     const [todos, setTodos] = useState([]);
     const [active, setActive] = useState(false);
     const navigation = useNavigation();
+    const {user} = useUserContext();
     
-    useEffect(() => {
-        todosStorage
-            .get()
-            .then(setTodos)
-            .catch(console.error);
-    }, []);
+    // useEffect(() => {
+    //     todosStorage
+    //         .get()
+    //         .then(setTodos)
+    //         .catch(console.error);
+    // }, []);
+
+    // useEffect(() => {
+    //     todosStorage.set(todos).catch(console.error)
+    // },[todos]);
 
     useEffect(() => {
-        todosStorage.set(todos).catch(console.error)
-    },[todos]);
+        getTodos().then(setTodos);
+    }, [todos]);
 
 
     
@@ -60,14 +67,14 @@ function TodoScreen() {
             }
         }
         isEverythingDone();
-
     },[todos])
 
-    const onMoveToFeed = () => {
+    const onMoveToFeed = useCallback(async() => {
+        navigation.navigate('Upload');
+        await createTodo({todos, user})
         setTodos([]);
         setActive(false);
-        navigation.navigate('Upload');
-    }
+    },[todos, user, navigation])
 
     return (
         <SafeAreaView edges={['bottom']} style={styles.block}>

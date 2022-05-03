@@ -10,7 +10,7 @@ function TodoList({todos, onToggle, onRemove}) {
             renderItem={({item}) => (
                 <TodoItem id={item.id} text={item.text} done={item.done} onToggle={onToggle} onRemove={onRemove}/>
             )}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => String(item.id)}
         />
     )
 }
