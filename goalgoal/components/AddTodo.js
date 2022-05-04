@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 
 function AddTodo({onInsert, active}) {
     const [text, setText] = useState('');
+    const inputRef = useRef();
     const onPress = () => {
         onInsert(text);
         setText('');
         Keyboard.dismiss();
+        inputRef.current.focus();  
     };
 
     return (
@@ -21,6 +23,7 @@ function AddTodo({onInsert, active}) {
                     onChangeText={setText}
                     onSubmitEditing={onPress}
                     returnKeyType="done"
+                    ref={inputRef}
                     />
                     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
                         <View style={styles.addIcon}>

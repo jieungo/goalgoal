@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from 'react';
-import { getNewerPosts, getOlderPosts, getPosts, PAGE_SIZE } from '../lib/posts';
+import { useState, useCallback } from 'react';
+import { getNewerPosts, getOlderPosts, PAGE_SIZE } from '../lib/posts';
 
 export default function usePosts(userId) {
     const [posts, setPosts] = useState(null);
@@ -32,14 +32,7 @@ export default function usePosts(userId) {
         setPosts(newerPosts.concat(posts));
     }, [posts, userId, refreshing]);
 
-    useEffect(() => {
-        getPosts({userId}).then((_posts) => {
-            setPosts(_posts);
-            if (_posts.length < PAGE_SIZE) {
-                setNoMorePost(true);
-            }
-        })
-    }, [userId])
+
 
     return {
         posts,

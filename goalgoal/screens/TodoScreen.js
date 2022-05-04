@@ -5,7 +5,6 @@ import DateHead from '../components/DateHead';
 import AddTodo from '../components/AddTodo';
 import Empty from '../components/Empty';
 import TodoList from '../components/TodoList';
-import todosStorage from '../storages/todosStorage';
 import { useNavigation } from '@react-navigation/native';
 import { createTodo, getTodos } from '../lib/todos';
 import { useUserContext } from '../contexts/UserContext';
@@ -16,30 +15,20 @@ function TodoScreen() {
     const [active, setActive] = useState(false);
     const navigation = useNavigation();
     const {user} = useUserContext();
-    
-    // useEffect(() => {
-    //     todosStorage
-    //         .get()
-    //         .then(setTodos)
-    //         .catch(console.error);
-    // }, []);
-
-    // useEffect(() => {
-    //     todosStorage.set(todos).catch(console.error)
-    // },[todos]);
 
     useEffect(() => {
         getTodos().then(setTodos);
     }, [todos]);
-
-
     
+
+
     const onInsert = text => {
         const nextId = todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
         const todo = {
             id: nextId,
             text,
             done: false,
+            date: new Date().toISOString(),
         }
         setTodos(todos.concat(todo));
     }
@@ -70,6 +59,7 @@ function TodoScreen() {
     },[todos])
 
     const onMoveToFeed = useCallback(async() => {
+
         navigation.navigate('Upload');
         await createTodo({todos, user})
         setTodos([]);

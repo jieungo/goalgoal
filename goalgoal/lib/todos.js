@@ -6,11 +6,11 @@ export function createTodo({user, todos}) {
   return todosCollection.add({
     user,
     todos,
-    createdAt: firestore.FieldValue.serverTimestamp(),
+    date: new Date().toISOString
   });
 }
 
-export async function getTodos() {
+export async function getTodos(userId) {
   let query = todosCollection.orderBy('createdAt', 'desc').limit(PAGE_SIZE)
   if (userId) {
       query = query.where('user.id', '==', userId);

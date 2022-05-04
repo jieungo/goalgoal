@@ -11,7 +11,7 @@ function ProfileScreen() {
 
     useEffect(() => {
         navigation.setOptions({
-            title: user.displayName,
+            title: 'Profile',
         })
         console.log(`user:${user}`)
     },[navigation, user]);

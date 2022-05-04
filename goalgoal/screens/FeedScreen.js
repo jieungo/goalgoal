@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { FlatList, ActivityIndicator, StyleSheet, RefreshControl } from 'react-native';
+import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 import PostCard from '../components/PostCard';
 import {getPosts, getOlderPosts, PAGE_SIZE, getNewerPosts} from '../lib/posts';
 import SplashScreen from 'react-native-splash-screen';
