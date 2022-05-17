@@ -19,14 +19,15 @@
 
 ### 🪄 프로젝트 기능
 
+<br>
 
 #### 1. 로그인 로그아웃 및 회원가입
 
 <div style="display:flex">
 <img src="https://user-images.githubusercontent.com/75401130/164699018-612995d0-4894-4e63-9d8d-85e0a6eb90c4.gif"
-width="50%">
+width="40%" height="50%">
 <img src="https://user-images.githubusercontent.com/75401130/164700398-13f38c4e-7ada-41d2-a283-90535892bbe2.gif"
-width="50%">
+width="40%" height="50%">
 </div>
 
 <br/>
@@ -40,7 +41,7 @@ width="50%">
 #####  2. 투두리스트 작성
 
 <img src="https://user-images.githubusercontent.com/75401130/164699319-5e36e7d8-f844-4389-8bc4-10d65a97a5da.gif"
-width="50%">
+width="40%" height="50%">
 <br/>
 
 - 투두리스트 작성 및 삭제
@@ -52,9 +53,9 @@ width="50%">
 #####  3. 피드작성
 <div style="display:flex">
 <img src="https://user-images.githubusercontent.com/75401130/164699712-8db6035c-d07d-4238-864a-dd79cbe6a29f.gif"
-width="50%">
+width="40%" height="50%">
 <img src="https://user-images.githubusercontent.com/75401130/164700071-0f7cd891-5924-4ff5-947a-aa0f6ac04c40.gif"
-width="50%">
+width="40%" height="50%">
 </div>
 <br/>
 
